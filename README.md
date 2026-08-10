@@ -2,8 +2,17 @@
 
 This repository explores, models, and predicts customer happiness drivers from survey data. By training classical machine learning algorithms and employing disciplined feature pruning, the finalized model achieves a **73% predictive accuracy** on unseen test data.
 
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://krwjqz8jcsac6dgf-8rm3x4yvwvuvkb3l5hgyie.streamlit.app/)
+
+> 🌐 **Live App:** Try the interactive dashboard live at [Customer Happiness Intelligence App](https://krwjqz8jcsac6dgf-8rm3x4yvwvuvkb3l5hgyie.streamlit.app/)
+>
 > 📄 **Looking for a deep dive?** Read the detailed [Project Overview](reports/summary/project_overview.md) for complete EDA findings, SHAP attribution insights, and strategic business recommendations.
 
+---
+
+## 🖥️ Application Preview
+
+![Customer Happiness Intelligence Streamlit Dashboard](reports/figures/app_preview.png)
 ---
 
 ## ✨ Key Features
@@ -21,28 +30,31 @@ This repository explores, models, and predicts customer happiness drivers from s
 ├── data/       # Raw and processed datasets (excluded for privacy)
 ├── notebooks/  # Exploratory data analysis & modeling experimentation
 ├── reports/    # Detailed findings, executive summaries, & figures
+│   ├── figures/# Saved plots & app preview screenshots
 │   └── summary/
-|       └──project_overview.md
+│       └── project_overview.md
 ├── src/        # Core source code and utilities
 │   ├── models/    # Saved .joblib model artifacts & metadata
 │   ├── streamlit/ # Dashboard layout & application UI logic
 │   └── utils/     # ModelTuner & PipelineTuner workflow managers
 └── app.py      # Streamlit application entry point
-
 ```
 
 ---
 
 ## 🚀 Quickstart & Usage
 
-### 1. Launching the Streamlit Dashboard
+### 1. Launching the Streamlit Dashboard Locally
 
 Run the application directly from the project root directory:
 
 ```bash
 streamlit run ./app.py
-
 ```
+
+Or access the hosted version instantly at [krwjqz8jcsac6dgf-8rm3x4yvwvuvkb3l5hgyie.streamlit.app](https://krwjqz8jcsac6dgf-8rm3x4yvwvuvkb3l5hgyie.streamlit.app/).
+
+---
 
 ### 2. Hyperparameter Tuning via `ModelTuner`
 
@@ -113,7 +125,6 @@ tuner.display_parameter_fits(search, parameter_grid, groupby="n_estimators")
 
 # Finalize evaluation on holdout test set (Locks tuner instance)
 tuner.predict_test_split(search.best_params_)
-
 ```
 
 > **Note on Test Set Leakage Safeguard:** If the resulting test score is unsatisfactory, iterate `random_state += 1` and re-instantiate `ModelTuner`. This re-splits the dataset to prevent implicit tuning against the holdout set.
